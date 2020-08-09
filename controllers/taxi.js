@@ -9,13 +9,22 @@ class TaxiController {
     console.log(this.dataPath,'dp')
   }
 
-  getAllTaxis() {
+  getAllTaxis(params = {}) {
     return new Promise((resolve, reject) => {
       fs.readFile(`./${this.dataPath}`, 'utf8',  (err, data) => {
         console.log(err,data)
         if (err) return reject (err);
         let taxis = JSON.parse(data);
-        taxis = taxis.filter((t) => t.active === true)
+        taxis = taxis.filter((t) => {
+          let isValidTaxi = true;
+          Object.keys(params).forEach((key) => {
+            if (params[key] !== t[key]) {
+              isValidTaxi = false;
+            }
+          })
+          if (!t.active) isValidTaxi = false;
+          return isValidTaxi;
+        })
         resolve(taxis);
       })
     })
