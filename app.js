@@ -1,16 +1,17 @@
-var express = require('express');
-var taxiRouter = require('./routes/taxi.js');
+const express = require('express');
+const taxiRouter = require('./routes/taxi.js');
 
-
-var app = express();
+const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/', taxiRouter);
 
+/* eslint-disable no-unused-vars */
+
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.status(err.status || 500);
   let errorMsg;
@@ -21,13 +22,12 @@ app.use(function(err, req, res, next) {
   }
   res.status(400);
 
-  res.send({ error: err.message })
+  res.send({ error: errorMsg });
 });
-
 
 // finally, let's start our server...
-var server = app.listen( process.env.PORT || 8000, function(){
-  console.log('Listening on port ' + server.address().port);
+const server = app.listen(process.env.PORT || 8000, () => {
+  console.log(`Listening on port ${server.address().port}`);
 });
 
-module.exports = app
+module.exports = app;
