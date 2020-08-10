@@ -4,15 +4,12 @@ const { dataPath } = require('../config');
 class TaxiController {
   constructor() {
     const env = process.env.NODE_ENV;
-    console.log(env, 'env');
     this.dataPath = dataPath[env];
-    console.log(this.dataPath, 'dp');
   }
 
   getAllTaxis(params = {}) {
     return new Promise((resolve, reject) => {
       fs.readFile(this.dataPath, 'utf8', (err, data) => {
-        console.log(err, data);
         if (err) return reject(err);
         let taxis = JSON.parse(data);
         taxis = taxis.filter((t) => {

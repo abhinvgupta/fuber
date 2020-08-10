@@ -9,7 +9,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/', taxiRouter);
 
 /* eslint-disable no-unused-vars */
-
 // error handler
 app.use((err, req, res, next) => {
   // set locals, only providing error in development

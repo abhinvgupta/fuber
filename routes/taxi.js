@@ -9,10 +9,8 @@ router.post('/bookTaxiRide', (req, res, next) => {
   if (!(params.latitude && params.longitude)) {
     return next(new Error('Invalid Params'));
   }
-  console.log(params);
   const taxiServiceInstance = new TaxiService();
   return taxiServiceInstance.bookTaxi(params).then((bookedTaxi) => {
-    console.log(bookedTaxi, 'booledtaxi');
     let booked = false;
     if (bookedTaxi && bookedTaxi.number) {
       booked = true;
