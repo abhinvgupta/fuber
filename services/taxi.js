@@ -31,7 +31,7 @@ class TaxiService {
     const updatedTaxi = await this.TaxiModel.updateOneTaxi(params.number, updateParams);
     if (params.time && params.distanceTravelled && updatedTaxi) {
       rideCost = calculateRideCost(params.time, params.distance, updatedTaxi.color);
-      console.log('Cost of the ride:', rideCost);
+      console.log('Cost of the ride:', rideCost, ' dogecoin');
     }
     return { updatedTaxi, rideCost };
   }
