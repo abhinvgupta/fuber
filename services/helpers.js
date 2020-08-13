@@ -1,4 +1,6 @@
-const getNearestTaxi = (allTaxis, params) => {
+const { InvalidCoordinatesError } = require('../constants');
+
+exports.getNearestTaxi = (allTaxis, params) => {
   const nearest = { taxi: null, distance: Number.MAX_SAFE_INTEGER };
   const { longitude: userLongitude, latitude: userLatitude } = params;
 
@@ -24,7 +26,7 @@ const getNearestTaxi = (allTaxis, params) => {
   return nearest.taxi;
 };
 
-const calculateRideCost = (time, distance, color) => {
+exports.calculateRideCost = (time, distance, color) => {
   let totalCoins = time * 1 + distance * 2;
   if (color === 'pink') {
     totalCoins += 5;
@@ -32,4 +34,8 @@ const calculateRideCost = (time, distance, color) => {
   return totalCoins;
 };
 
-module.exports = { getNearestTaxi, calculateRideCost };
+exports.validateCoordinates = (lat, long) => {
+  if ((lat < -180 || lat > 180) || (long < -180 || long > 180)) {
+    throw new Error(InvalidCoordinatesError);
+  }
+};

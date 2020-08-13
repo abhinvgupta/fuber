@@ -7,7 +7,7 @@ class TaxiController {
     this.dataPath = dataPath[env];
   }
 
-  getAllTaxis(params = {}) {
+  getTaxis(params = {}) {
     return new Promise((resolve, reject) => {
       fs.readFile(this.dataPath, 'utf8', (err, data) => {
         if (err) return reject(err);
@@ -28,7 +28,7 @@ class TaxiController {
   }
 
   async updateOneTaxi(number, newParams) {
-    const taxis = await this.getAllTaxis();
+    const taxis = await this.getTaxis();
     let updated;
     const modifiedData = taxis.map((taxi) => {
       if (taxi.number && taxi.number === number) {

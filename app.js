@@ -12,14 +12,13 @@ app.use('/', taxiRouter);
 // error handler
 app.use((err, req, res, next) => {
   // set locals, only providing error in development
-  res.status(err.status || 500);
   let errorMsg;
   if (typeof err === 'string') {
     errorMsg = err;
   } else {
     errorMsg = err.message;
   }
-  res.status(400);
+  res.status(err.status || 400);
 
   res.send({ error: errorMsg });
 });
