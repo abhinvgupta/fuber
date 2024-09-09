@@ -1,5 +1,7 @@
 # fuber
 
+This is a taxi booking service app. It has apis to book a taxi at your location for a specified time
+
 ## Steps to run
 1) npm i
 2) npm run start
